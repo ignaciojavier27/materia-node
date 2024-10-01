@@ -19,5 +19,21 @@ app.get("/user/:id-:name-:age", ( req, res ) => {
     `)
 })
 
+app.get("/search", ( req, res ) => {
+    // http://localhost:3000/search?name=ejemplo_nombre&edad=ejemplo_edad
+
+    res.set({
+        "content-type": "text/html; charset=utf-8"
+    })
+
+    res.end(`
+        <h1>Hola desde search<h1/>
+        <h2> Tu nombre es ${req.query.name} </h2>
+        <h2> Tu edad es ${req.query.edad} </h2>
+    `)
+})
+
+
+
 app.listen(3000, () => console.log("Express desde http://localhost:3000"))
 
