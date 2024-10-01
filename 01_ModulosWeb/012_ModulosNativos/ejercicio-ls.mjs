@@ -1,6 +1,8 @@
 import fs from "node:fs";
 
-fs.readdir(".", (err, files) => {
+const carpeta = process.argv[2] ?? '.';
+
+fs.readdir(folder, (err, files) => {
     if (err) {
         console.error(`Error al leer el directorio: ${err}`);
         return;
