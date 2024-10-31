@@ -11,45 +11,37 @@ let tasks = [
     }
 ];
 
-const getAllTasks = (req, res) => {
-
+export const getAllTasks = (req, res) => {
+    res.render("index.pug", {
+        title: "Lista de Tareas",
+        tasks
+    })
 }
 
-const getAddTaskForm = (req, res) => {
+export const getAddTaskForm = (req, res) => {
     
 }
 
-const addTask = (req, res) => {
+export const addTask = (req, res) => {
     
 }
 
-const getEditTaskForm = (req, res) => {
+export const getEditTaskForm = (req, res) => {
     
 }
 
-const editTask = (req, res) => {
+export const editTask = (req, res) => {
 
 }
 
-const completeTask = (req, res) => {
+export const completeTask = (req, res) => {
     
 }
 
-const uncompleteTask = (req, res) => {
+export const uncompleteTask = (req, res) => {
     
 }
 
-const deleteTask = (req, res) => {
+export const deleteTask = (req, res) => {
 
-}
-
-export default {
-    getAllTasks,
-    getAddTaskForm,
-    addTask,
-    getEditTaskForm,
-    editTask,
-    completeTask,
-    uncompleteTask,
-    deleteTask
 }

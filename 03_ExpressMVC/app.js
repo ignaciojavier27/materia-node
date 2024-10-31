@@ -7,13 +7,16 @@ import { getAllTasks, getAddTaskForm, addTask, getEditTaskForm, editTask, comple
 import { error404 } from "./controllers/errorController.js";
 
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
+const __dirname = path.dirname(new URL(import.meta.url).pathname.replace(/^\/|\/$/g, '').replace(/%5C/g, '\\'));
 const app = express();
 const port = 3000;
 
 app.use(cors());
 app.use(helmet());
 app.use(morgan("dev"));
+
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "pug");
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
