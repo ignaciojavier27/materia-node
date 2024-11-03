@@ -18,10 +18,6 @@ export const getAllTasks = (req, res) => {
     })
 }
 
-export const getAddTaskForm = (req, res) => {
-    res.render("add.pug", { title: "Agregar Tarea" })
-}
-
 export const addTask = (req, res) => {
     let { title } = req.body;
     let id = tasks.length + 1;
@@ -33,16 +29,6 @@ export const addTask = (req, res) => {
     })
 
     res.redirect("/")
-}
-
-export const getEditTaskForm = (req, res) => {
-    let id = parseInt(req.params.id);
-    let task = tasks.find(task => task.id === id);
-
-    (!task)
-        ? res.redirect("/")
-        : res.render("edit.pug", { title: "Editar Tarea", task })
-
 }
 
 export const editTask = (req, res) => {
