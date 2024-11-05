@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
-import { getAllTasks, addTask, editTask, completeTask, uncompleteTask, deleteTask } from "./controllers/taskController.js";
+import { getTaskById, getAllTasks, addTask, editTask, completeTask, uncompleteTask, deleteTask } from "./controllers/taskController.js";
 import { error404 } from "./controllers/errorController.js";
 
 const app = express();
@@ -17,6 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.get("/tasks", getAllTasks);
 app.post("/tasks", addTask);
+app.put("/tasks/:id", getTaskById);
 app.put("/tasks/:id", editTask);
 app.put("/tasks/complete/:id", completeTask);
 app.put("/tasks/uncomplete/:id", uncompleteTask);
