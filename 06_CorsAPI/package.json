@@ -1,0 +1,16 @@
+{
+  "name": "06_corsapi",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "dev": "node --watch app.js"
+  },
+  "keywords": [],
+  "author": "Ignacio",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "4.21.1"
+  }
+}
