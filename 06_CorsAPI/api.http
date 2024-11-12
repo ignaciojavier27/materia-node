@@ -1,0 +1,9 @@
+### Obtiene todas las películas
+GET http://localhost:1234/movies
+
+### Obtener película por ID
+GET http://localhost:1234/movies/1
+
+### Obtener películas por género
+GET http://localhost:1234/movies?genre=terror
+
