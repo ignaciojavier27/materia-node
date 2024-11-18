@@ -3,8 +3,8 @@ import path from "path";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
-import { error404 } from "./controllers/errorController.js";
 import routesTasks from "./routes/taskRouter.js"
+import error from "./middlewares/error.js";
 
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname.replace(/^\/|\/$/g, '').replace(/%5C/g, '\\'));
@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(routesTasks);
-app.use(error404);
+app.use(error.e404);
 
 app.listen(port, () => {
     console.log(`Aplicación corriendo en http://localhost:${port}`);
