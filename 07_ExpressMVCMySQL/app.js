@@ -9,7 +9,7 @@ import error from "./middlewares/error.js";
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname.replace(/^\/|\/$/g, '').replace(/%5C/g, '\\'));
 const app = express();
-const port = 3000;
+const port = 1234;
 
 app.use(cors());
 app.use(helmet());

@@ -1,9 +1,9 @@
-create database TODO_LIST;
-use TODO_LIST;
+create database todo_list;
+use todo_list;
 
-create table TASKS (
-	ID INT auto_increment primary key,
-	TITLE VARCHAR(255) not null,
-	COMPLETED BOOLEAN default false
+create table tasks (
+	id INT auto_increment primary key,
+	title VARCHAR(255) not null,
+	completed BOOLEAN default false
 )engine=InnoDB;
 

@@ -1,80 +1,93 @@
-let tasks = [
-    {
-        id: 1,
-        title: "Tarea 1",
-        completed: false
-    },
-    {
-        id: 2,
-        title: "Tarea 2",
-        completed: true
-    }
-];
+import error from "../middlewares/error.js";
+import Task from "../models/Task.js";
 
 const taskController = {
 
-    getAll : (req, res) => {
-        res.render("index.pug", {
-            title: "Lista de Tareas",
-            tasks
-        })
+    getAll : async (req, res) => {
+        try {
+            let tasks = await Task.getAll();
+            console.log(tasks)
+            res.render("index.pug", { titulo: "Lista de Tareas", tasks })
+        } catch (err) {
+            error.e500( req, res, err );
+        }
     },
 
     getAddForm : (req, res) => {
-        res.render("add.pug", { title: "Agregar Tarea" })
+        res.render("task-add.pug", { title: "Agregar Tarea" })
     },
     
-    create : (req, res) => {
-        let { title } = req.body;
-        let id = tasks.length + 1;
-    
-        tasks.push({
-            id,
-            title,
-            completed: false
-        })
-    
-        res.redirect("/")
-    },
-    
-    getEditForm : (req, res) => {
-        let id = parseInt(req.params.id);
-        let task = tasks.find(task => task.id === id);
-    
-        (!task)
-            ? res.redirect("/")
-            : res.render("edit.pug", { title: "Editar Tarea", task })
-    
-    },
-    
-    update : (req, res) => {
-        let id = parseInt(req.params.id);
-        let taskIndex = tasks.findIndex(task => task.id === id);
-    
-        if(taskIndex === -1){
+    create : async (req, res) => {
+        
+        try {            
+            let { title } = req.body;
+            await Task.create({ title });
             res.redirect("/")
-        }else{
-            tasks[taskIndex].title = req.body.title;
+        } catch (error) {
+            error.e500( req, res, err );
+        }
+
+    },
+    
+    getEditForm : async (req, res) => {
+
+        try {
+            let id = parseInt(req.params.id);
+            let task = await Task.getOne(id);
+        
+            (!task)
+                ? error.e404( req, res )
+                : res.render("task-edit.pug", { title: "Editar Tarea", task })
+        } catch (err) {
+            error.e500( req, res, err );
+        }
+    
+    },
+    
+    update : async (req, res) => {
+        try {
+            let id = parseInt(req.params.id);
+            let title = req.body.title;
+
+            await Task.update({id, title});
             res.redirect("/")
+        } catch (err) {
+            error.e500( req, res, err );
+        }
+    
+    },
+    
+    complete : async (req, res) => {
+        try {
+            let id = parseInt(req.params.id);
+            
+            await Task.complete(id);
+            res.redirect("/")
+        } catch (err) {
+            error.e500( req, res, err );
         }
     },
     
-    complete : (req, res) => {
-        let id = parseInt(req.params.id);
-        tasks[id - 1].completed = true;
-        res.redirect("/")
+    uncomplete : async (req, res) => {
+        try {
+            let id = parseInt(req.params.id);
+            
+            await Task.uncomplete(id);
+            res.redirect("/")
+        } catch (err) {
+            error.e500( req, res, err );
+        }
     },
     
-    uncomplete : (req, res) => {
-        let id = parseInt(req.params.id);
-        tasks[id - 1].completed = false;
-        res.redirect("/")
-    },
-    
-    delete : (req, res) => {
-        let id = parseInt(req.params.id);
-        tasks = tasks.filter(task => task.id !== id)
-        res.redirect("/")
+    delete : async (req, res) => {
+        try {
+            let id = parseInt(req.params.id);
+            
+            await Task.delete(id);
+            res.redirect("/")
+        } catch (err) {
+            error.e500( req, res, err );
+        }
     }
 }
 

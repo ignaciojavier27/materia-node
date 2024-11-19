@@ -1,4 +1,4 @@
-export { Router } from "express";
+import { Router } from "express";
 import taskController from "../controllers/taskController.js";
 
 const routes = Router();
