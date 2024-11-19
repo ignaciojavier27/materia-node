@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    main.container
+        h1 Signin
+        form(action="/signin" method="POST")
+            label(for="username") User:
+            input(type="text", id="username" name="username", required)
+            br
+            label(for="password") Password:
+            input(type="password", id="password" name="password", required)
+            button.add-button(type="submit") Signin
+            if newUser
+                br
+                br
+                p Nuevo usuario registrado
+            a.back-button(href="/login") Login
